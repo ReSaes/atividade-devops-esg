@@ -1,0 +1,33 @@
+name: Java CI/CD with Docker
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Configurar JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build com Maven (Compilação e Testes)
+      run: mvn -B package --file pom.xml
+
+    - name: Build da Imagem Docker
+      run: |
+        docker build -t meu-projeto-esg:latest .
+        echo "Imagem Docker gerada com sucesso!"
+
+    - name: Simulação de Deploy
+      run: echo "O sistema está pronto para ser enviado ao servidor de produção."
