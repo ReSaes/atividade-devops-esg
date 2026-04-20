@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  db-esg:
+    image: gvenzl/oracle-xe
+    container_name: oracle_db_container
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_PASSWORD=SuaSenhaForte123
+      - APP_USER=usuario_esg
+      - APP_USER_PASSWORD=senha_esg
+    volumes:
+      - odata:/opt/oracle/oradata
+    networks:
+      - esg-network
+
+  app:
+    build: .
+    container_name: esg_app_container
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@db-esg:1521/xe
+      SPRING_DATASOURCE_USERNAME: usuario_esg
+      SPRING_DATASOURCE_PASSWORD: senha_esg
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: oracle.jdbc.OracleDriver
+      SPRING_FLYWAY_URL: jdbc:oracle:thin:@db-esg:1521/xe
+      SPRING_FLYWAY_USER: usuario_esg
+      SPRING_FLYWAY_PASSWORD: senha_esg
+    depends_on:
+      - db-esg
+    networks:
+      - esg-network
+
+volumes:
+  odata:
+
+networks:
+  esg-network:
+    driver: bridge
