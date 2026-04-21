@@ -1,4 +1,4 @@
-name: Java CI/CD with Docker
+name: CI/CD Pipeline - Esgincdivcorp
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-pack:
+    name: Build & Dockerize
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout do codigo
+    - name: Checkout do código
       uses: actions/checkout@v4
 
     - name: Configurar JDK 21
@@ -21,13 +21,35 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build com Maven
-      run: mvn -B package -DskipTests --file pom.xml
+    - name: Ajustar permissão do Maven Wrapper
+      run: chmod +x mvnw
 
-    - name: Build da Imagem Docker
+    - name: Compilar Projeto (Esgincdivcorp)
+      run: ./mvnw -B package -DskipTests --file pom.xml
+
+    - name: Gerar Imagem Docker
       run: |
-        docker build -t meu-projeto-esg:latest .
-        echo "Imagem Docker gerada com sucesso!"
+        docker build -t esgincdivcorp-app:latest .
+        echo "Imagem Docker gerada com sucesso para o sistema de diversidade."
 
-    - name: Simulação de Deploy
-      run: echo "O sistema está pronto para ser enviado ao servidor de produção."
+  deploy-staging:
+    name: Deploy to Staging
+    needs: build-and-pack
+    runs-on: ubuntu-latest
+    steps:
+    - name: Simulação de Deploy - Staging
+      run: |
+        echo "Conectando ao servidor de Staging do Esgincdivcorp..."
+        echo "Validando regras de triagem de currículos em ambiente de teste."
+        echo "Status: Staging online em http://staging.esgincdivcorp.com"
+
+  deploy-production:
+    name: Deploy to Production
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    steps:
+    - name: Simulação de Deploy - Produção
+      run: |
+        echo "Iniciando deploy em Produção (Esgincdivcorp)..."
+        echo "Publicando aplicação final de seleção inclusiva."
+        echo "Status: Produção online em http://www.esgincdivcorp.com.br"
