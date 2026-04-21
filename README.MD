@@ -12,7 +12,9 @@ Bash
 docker-compose up --build
 Acompanhe os logs no terminal. Quando visualizar a mensagem DATABASE IS READY TO USE!, o ambiente estará pronto.
 
-![Log do banco pronto](Prints/DB_Ready.png)
+<p align="left">
+<img src="Prints/DB_Ready.png" width="850" alt="Log do banco pronto">
+</p>
 
 A aplicação poderá ser acessada em: http://localhost:8080.
 
@@ -31,7 +33,9 @@ Deploy Production: Entrega final em ambiente de produção.
 
 Funcionamento: O gatilho de execução é disparado a cada push na branch principal (main).
 
-![Workflow finalizado com sucesso](Prints/Workflow_CI_CD.png)
+<p align="left">
+<img src="Prints/Workflow_CI_CD.png" width="850" alt="[Workflow finalizado com sucesso">
+</p>
 
 ## Containerização
 O projeto utiliza uma estratégia de containerização moderna para garantir leveza e segurança:
@@ -48,8 +52,14 @@ Orquestração: O arquivo docker-compose.yml automatiza a subida do banco de dad
 Abaixo, as evidências de que o ciclo de vida do software está operacional em todos os níveis:
 
 Execução de Deploy (Staging e Produção)
-![Deploy em Staging](Prints/Deploy_Staging.png)
-![Deploy em Produção](Prints/Deploy_Producao.png)
+
+<p align="left">
+<img src="Prints/Deploy_Staging.png" width="850" alt="[Deploy em Staging">
+</p>
+
+<p align="left">
+<img src="Prints/Deploy_Producao.png" width="850" alt="[Deploy em Produção">
+</p>
 
 ## Tecnologias utilizadas
 Backend: Java 21 / Spring Boot 3.x
