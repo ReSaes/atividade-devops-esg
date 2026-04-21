@@ -12,6 +12,8 @@ Bash
 docker-compose up --build
 Acompanhe os logs no terminal. Quando visualizar a mensagem DATABASE IS READY TO USE!, o ambiente estará pronto.
 
+![Log do banco pronto](prints/DB_Ready.png)
+
 A aplicação poderá ser acessada em: http://localhost:8080.
 
 ## Pipeline CI/CD
@@ -29,7 +31,7 @@ Deploy Production: Entrega final em ambiente de produção.
 
 Funcionamento: O gatilho de execução é disparado a cada push na branch principal (main).
 
-[INSERIR PRINT 2: Print do gráfico visual do GitHub Actions mostrando os 3 blocos verdes: Build, Staging e Production]
+![Workflow finalizado com sucesso](prints/Workflow_CI_CD.png)
 
 ## Containerização
 O projeto utiliza uma estratégia de containerização moderna para garantir leveza e segurança:
@@ -46,7 +48,8 @@ Orquestração: O arquivo docker-compose.yml automatiza a subida do banco de dad
 Abaixo, as evidências de que o ciclo de vida do software está operacional em todos os níveis:
 
 Execução de Deploy (Staging e Produção)
-[INSERIR PRINT 3: Print do log detalhado dentro do GitHub Actions mostrando a mensagem de "Deploy em PRODUÇÃO finalizado com sucesso"]
+![Deploy em Staging](prints/Deploy_Staging.png)
+![Deploy em Produção](prints/Deploy_Producao.png)
 
 ## Tecnologias utilizadas
 Backend: Java 21 / Spring Boot 3.x
